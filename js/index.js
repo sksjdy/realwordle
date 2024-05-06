@@ -5,6 +5,7 @@ let index = 0;
 
 function appStart() {
   const nextLine = () => {
+    if (attempt === 6) return gameover();
     attempt++;
     index = 0;
   };
