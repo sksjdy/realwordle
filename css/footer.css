@@ -42,7 +42,7 @@ footer {
   cursor: pointer;
 }
 
-.key-block-change {
+.key-block-backspace {
   display: flex;
   justify-content: center;
   align-items: center;
