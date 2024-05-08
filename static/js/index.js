@@ -1,15 +1,14 @@
-const 정답 = "CHELS";
-
 let attempt = 0;
 let index = 0;
 let timer;
+const footer = document.querySelector("footer");
 
 function appStart() {
   const displayGameover = () => {
     const div = document.createElement("div");
     div.innerText = "게임이 종료됐습니다.";
     div.style =
-      "display:flex; justify-content:center; align-items:center; position:absolute; top:33vh; left:37vw;background-color:black;width:200px; height:100px;color:white";
+      "display:flex; justify-content:center; align-items:center; position:absolute; top:33vh; left:42vw;background-color:black;width:200px; height:100px;color:white";
     document.body.appendChild(div);
   };
 
@@ -23,8 +22,10 @@ function appStart() {
     displayGameover();
     clearInterval(timer);
   };
-  const handleEnterKey = () => {
+  const handleEnterKey = async () => {
     let 맞은_갯수 = 0;
+    const 응답 = await fetch("/answer");
+    const 정답 = await 응답.json();
     for (let i = 0; i < 5; i++) {
       const block = document.querySelector(
         `.board-block[data-index='${attempt}${i}']`
@@ -51,24 +52,34 @@ function appStart() {
     if (index !== 0) index--;
   };
 
-  const clickKey = (event) => {
-    const clickedKeyBox = event.target;
-    if (index >= 5) {
-      return;
+  const KeyClick = (event) => {
+    const boardBlock = event.target.innerText;
+    const text = document.querySelector(
+      `.board-block[data-index='${attempt}${index}']`
+    );
+    if (boardBlock === "지우기") handleBackspace();
+    else if (index === 5) {
+      if (boardBlock === "ENTER") handleEnterKey();
+      else return;
+    } else if (boardBlock !== "ENTER") {
+      text.innerText = boardBlock;
+      index++;
     }
-    if (clickedKeyBox.classList.contains("key-block")) {
-      const clickedKey = clickedKeyBox.dataset.key;
-      const thisBlock = document.querySelector(
-        `.board-block[data-index='${attempt}${index}']`
-      );
-      if (clickedKey === "ENTER") {
-        handleEnterKey();
-      } else {
-        thisBlock.innerText = clickedKey;
-        index++;
-      }
+  };
+
+  const keyTouch = (event) => {
+    const boardBlock = event.target.innerText;
+    const text = document.querySelector(
+      `.board-block[data-index='${attempt}${index}']`
+    );
+    if (boardBlock === "지우기") handleBackspace();
+    else if (index === 5) {
+      if (boardBlock === "ENTER") handleEnterKey();
+      else return;
+    } else if (boardBlock !== "ENTER") {
+      text.innerText = boardBlock;
+      index++;
     }
-    console.log(clickedKeyBox.dataset.key);
   };
 
   const handleKeyDown = (event) => {
@@ -103,7 +114,7 @@ function appStart() {
 
   startTimer();
   window.addEventListener("keydown", handleKeyDown);
-  window.addEventListener("click", clickKey);
+  footer.addEventListener("click", KeyClick);
+  footer.addEventListener("touchstart", keyTouch);
 }
-
 appStart();

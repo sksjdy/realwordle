@@ -1,5 +1,5 @@
 footer {
-  margin-top: 190px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,10 +47,10 @@ footer {
   justify-content: center;
   align-items: center;
   background-color: #d3d6da;
-  width: 25px;
+  width: 65px;
   height: 55px;
   border-radius: 3px;
   font-weight: bold;
-  padding: 0 20px 0 20px;
   cursor: pointer;
+  font-size: 13px;
 }
