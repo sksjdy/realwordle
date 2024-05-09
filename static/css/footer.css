@@ -47,10 +47,10 @@ footer {
   justify-content: center;
   align-items: center;
   background-color: #d3d6da;
-  width: 65px;
+  width: 20px;
   height: 55px;
   border-radius: 3px;
+  padding: 0 20px 0 20px;
   font-weight: bold;
   cursor: pointer;
-  font-size: 13px;
 }
