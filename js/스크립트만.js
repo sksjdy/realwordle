@@ -72,20 +72,19 @@ function appStart() {
 
   const keyTouch = (event) => {
     if (touchHandled) return;
-
-    const boardBlock = event.target.innerText;
+    const boardBlock = event.srcElement.dataset.key;
+    const enter = event.target.innerText;
     const text = document.querySelector(
       `.board-block[data-index='${attempt}${index}']`
     );
-    if (boardBlock === "지우기") handleBackspace();
+    if (boardBlock === "Backspace") handleBackspace();
     else if (index === 5) {
-      if (boardBlock === "ENTER") handleEnterKey();
+      if (enter === "ENTER") handleEnterKey();
       else return;
-    } else if (boardBlock !== "ENTER") {
+    } else if (enter !== "ENTER") {
       text.innerText = boardBlock;
       index++;
     }
-
     touchHandled = true;
   };
 
