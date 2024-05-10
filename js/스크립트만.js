@@ -20,11 +20,13 @@ function appStart() {
     attempt++;
     index = 0;
   };
+
   const gameover = () => {
     window.removeEventListener("keydown", handleKeyDown);
     displayGameover();
     clearInterval(timer);
   };
+
   const handleEnterKey = () => {
     let 맞은_갯수 = 0;
     for (let i = 0; i < 5; i++) {
@@ -104,6 +106,7 @@ function appStart() {
       index++;
     }
   };
+
   const startTimer = () => {
     const 시작_시간 = new Date();
 
@@ -128,4 +131,5 @@ function appStart() {
   footer.addEventListener("touchstart", keyTouch);
   footer.addEventListener("touchend", resetTouchHandled);
 }
+
 appStart();
