@@ -116,6 +116,6 @@ function appStart() {
   startTimer();
   window.addEventListener("keydown", handleKeyDown);
   footer.addEventListener("click", KeyClick);
-  footer.addEventListener("touchstart", keyTouch);
+  footer.addEventListener("touchend", keyTouch);
 }
 appStart();
