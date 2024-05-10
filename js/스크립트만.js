@@ -3,7 +3,7 @@ const 정답 = "CHELS";
 let attempt = 0;
 let index = 0;
 let timer;
-let touchHandled = false;
+let touchHandled = true;
 const footer = document.querySelector("footer");
 
 function appStart() {
