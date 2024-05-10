@@ -1,3 +1,5 @@
+const 정답 = "CHELS";
+
 let attempt = 0;
 let index = 0;
 let timer;
@@ -9,7 +11,7 @@ function appStart() {
     const div = document.createElement("div");
     div.innerText = "게임이 종료됐습니다.";
     div.style =
-      "display:flex; justify-content:center; align-items:center; position:absolute; top:33vh; left:42vw;background-color:black;width:200px; height:100px;color:white";
+      "display:flex; justify-content:center; align-items:center; position:absolute; top:33vh; left:37vw;background-color:black;width:200px; height:100px;color:white";
     document.body.appendChild(div);
   };
 
@@ -18,17 +20,13 @@ function appStart() {
     attempt++;
     index = 0;
   };
-
   const gameover = () => {
     window.removeEventListener("keydown", handleKeyDown);
     displayGameover();
     clearInterval(timer);
   };
-
-  const handleEnterKey = async () => {
+  const handleEnterKey = () => {
     let 맞은_갯수 = 0;
-    const 응답 = await fetch("/answer");
-    const 정답 = await 응답.json();
     for (let i = 0; i < 5; i++) {
       const block = document.querySelector(
         `.board-block[data-index='${attempt}${i}']`
@@ -74,6 +72,7 @@ function appStart() {
 
   const keyTouch = (event) => {
     if (touchHandled) return;
+
     const boardBlock = event.target.innerText;
     const text = document.querySelector(
       `.board-block[data-index='${attempt}${index}']`
@@ -86,6 +85,7 @@ function appStart() {
       text.innerText = boardBlock;
       index++;
     }
+
     touchHandled = true;
   };
 
@@ -105,7 +105,6 @@ function appStart() {
       index++;
     }
   };
-
   const startTimer = () => {
     const 시작_시간 = new Date();
 
@@ -120,7 +119,7 @@ function appStart() {
     timer = setInterval(setTime, 1000);
   };
 
-  const resetTouchHandle = () => {
+  const resetTouchHandled = () => {
     touchHandled = false;
   };
 
@@ -128,7 +127,6 @@ function appStart() {
   window.addEventListener("keydown", handleKeyDown);
   footer.addEventListener("click", KeyClick);
   footer.addEventListener("touchstart", keyTouch);
-  footer.addEventListener("touchend", resetTouchHandle);
+  footer.addEventListener("touchend", resetTouchHandled);
 }
-
 appStart();
