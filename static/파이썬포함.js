@@ -1,6 +1,7 @@
 let attempt = 0;
 let index = 0;
 let timer;
+let touchHandled = false;
 const footer = document.querySelector("footer");
 
 function appStart() {
@@ -69,6 +70,7 @@ function appStart() {
   };
 
   const keyTouch = (event) => {
+    if (touchHandled) return;
     const boardBlock = event.target.innerText;
     const text = document.querySelector(
       `.board-block[data-index='${attempt}${index}']`
@@ -81,6 +83,7 @@ function appStart() {
       text.innerText = boardBlock;
       index++;
     }
+    touchHandled = true;
   };
 
   const handleKeyDown = (event) => {
@@ -112,10 +115,13 @@ function appStart() {
     }
     timer = setInterval(setTime, 1000);
   };
+  const resetTouchHandle = () => {
+    touchHandled = false;
+  };
 
   startTimer();
   window.addEventListener("keydown", handleKeyDown);
   footer.addEventListener("click", KeyClick);
-  footer.addEventListener("touchend", keyTouch);
+  footer.addEventListener("touchend", resetTouchHandle);
 }
 appStart();
